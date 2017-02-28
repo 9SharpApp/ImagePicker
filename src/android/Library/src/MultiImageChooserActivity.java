@@ -319,7 +319,14 @@ public class MultiImageChooserActivity extends AppCompatActivity implements
             progress.dismiss();
             finish();
         } else {
-	        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR); //prevent orientation changes during processing
+	    if (getResources().getConfiguration().orientation == 1)
+            {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //prevent orientation changes during processing
+            }
+            else
+            {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); //prevent orientation changes during processing
+            }
             new ResizeImagesTask().execute(fileNames.entrySet());
         }
     }
